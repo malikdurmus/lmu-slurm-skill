@@ -7,15 +7,28 @@ description: Run jobs on the LMU IfI CIP SLURM cluster (ificip). Use for sbatch,
 
 Everything here was inspected on 2026-10-31. Facts carry their source in [references/cluster-facts.md](references/cluster-facts.md). If a command behaves differently from this file, trust the cluster and follow [references/recheck.md](references/recheck.md).
 
+## First: ask about Abaki access
+
+Make this your first action when this skill loads, before any command or advice, whatever the request is. Call the `AskUserQuestion` tool once per conversation, and reuse the answer afterwards:
+
+- Question: "Do you have permission to use the Abaki machines?"
+- Header: "Abaki"
+- Single choice, with these options:
+  - "Yes": "I was granted Abaki access. Claude verifies it before using it."
+  - "No": "Use the general partitions only."
+  - "Not sure": "Treat as no access for now."
+
+If `AskUserQuestion` isn't available, ask the same question in chat and wait for the answer.
+
+- **No or not sure:** use only the general partitions. Abaki needs an approved application, so mention [how to apply](references/cluster-facts.md#abaki) if the job really needs it.
+- **Yes:** run the check under [Abaki](#abaki). Use Abaki only if it passes.
+
 ## Before submitting
 
-1. **Ask about Abaki access if the job could use it.** Ask when the job needs more than 8 GB VRAM, more than about 60 GB RAM, or uninterrupted running on an NVIDIA GPU: "Do you have permission to use the Abaki machines?"
-   - **No or unsure:** use the general partitions below. Abaki needs an approved application, so mention [how to apply](references/cluster-facts.md#abaki) if the job really needs it.
-   - **Yes:** run the check under [Abaki](#abaki). Continue on Abaki only if it passes.
-2. **Choose the partition** from the table. Always pass `-p`, because there is no default partition.
-3. **Set `--time`.** Unlimited partitions have no default limit, and shorter jobs get higher priority.
-4. **Validate without submitting:** `sbatch --test-only job.sbatch`.
-5. **Show the user the job count and the command**, then submit.
+1. **Choose the partition** from the table. Always pass `-p`, because there is no default partition.
+2. **Set `--time`.** Unlimited partitions have no default limit, and shorter jobs get higher priority.
+3. **Validate without submitting:** `sbatch --test-only job.sbatch`.
+4. **Show the user the job count and the command**, then submit.
 
 The job is ready when `--test-only` prints a start time and every checkpoint and log path is in the home directory or `BIG`.
 
