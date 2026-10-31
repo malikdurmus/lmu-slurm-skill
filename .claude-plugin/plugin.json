@@ -1,0 +1,9 @@
+{
+  "name": "lmu-slurm",
+  "version": "0.1.0",
+  "description": "Run SLURM jobs on the LMU IfI CIP cluster: partitions, GPUs, limits, suspension and checkpointing.",
+  "author": { "name": "Malik Durmus", "url": "https://github.com/malikdurmus" },
+  "repository": "https://github.com/malikdurmus/lmu-slurm-skill",
+  "license": "MIT",
+  "keywords": ["slurm", "hpc", "lmu", "cip", "gpu"]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "lmu-slurm-skill",
+  "owner": { "name": "Malik Durmus", "url": "https://github.com/malikdurmus" },
+  "description": "SLURM skill for the LMU IfI CIP cluster",
+  "plugins": [
+    {
+      "name": "lmu-slurm",
+      "source": "./",
+      "description": "Run SLURM jobs on the LMU IfI CIP cluster: partitions, GPUs, limits, suspension and checkpointing."
+    }
+  ]
+}
